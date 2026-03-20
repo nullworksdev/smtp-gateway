@@ -14,8 +14,8 @@ PORT=9000 go run . # custom port
 Or with Docker:
 
 ```bash
-docker build -t email-relay .
-docker run -p 8080:8080 email-relay
+docker build -t smtp-gateway .
+docker run -p 8080:8080 smtp-gateway
 ```
 
 ---
@@ -63,7 +63,7 @@ Send an email.
 }
 ```
 
-#### Relay error — `502 Bad Gateway`
+#### Gateway error — `502 Bad Gateway`
 
 ```json
 {
@@ -93,7 +93,7 @@ curl -s -X POST http://localhost:8080/api/send \
     "password":  "your-app-password",
     "from":      "You <you@gmail.com>",
     "to":        ["alice@example.com"],
-    "subject":   "Hello from email-relay",
+    "subject":   "Hello from smtp-gateway",
     "body":      "This is a plain-text test email."
   }'
 ```
@@ -123,6 +123,6 @@ curl -s -X POST http://localhost:8080/api/send \
 
 - **Port 587** — STARTTLS (recommended for most providers).
 - **Port 465** — Implicit TLS (SMTPS); used by some providers.
-- **Port 25** — Unauthenticated / relay (dev/internal use only).
+- **Port 25** — Unauthenticated / smtp (dev/internal use only).
 - Gmail requires an **App Password** (2FA must be enabled).
 - Credentials are never logged or persisted.
